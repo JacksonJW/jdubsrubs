@@ -2,7 +2,7 @@
 
 Ecommerce store for my dad to sell his bbq rubs.
 
-Created by following along with [Create an eCommerce Store with Next.js and Stripe Checkout](https://egghead.io/courses/create-an-ecommerce-store-with-next-js-and-stripe-checkout-562c) course by Colby Fayock on [egghead.io](https://egghead.io). See his repo [here](https://github.com/colbyfayock/space-jelly-store-workshop).
+Created by following along with [Create an eCommerce Store with Next.js and Stripe Checkout](https://egghead.io/courses/create-an-ecommerce-store-with-next-js-and-stripe-checkout-562c) course by [Colby Fayock](https://github.com/colbyfayock) on [egghead.io](https://egghead.io). See his repo [here](https://github.com/colbyfayock/space-jelly-store-workshop).
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
