@@ -1,8 +1,11 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+
+import Image from 'next/image'
 import rougaroo from '../public/images/rougaroo.png'
 import jdubsrub from '../public/images/jdubsrub.png'
+
+import products from '../products.json'
 
 
 export default function Home() {
@@ -24,30 +27,24 @@ export default function Home() {
         </p>
 
         <ul className={styles.grid}>
-          <li className={styles.card}>
-            <a href="https://nextjs.org/docs">
-              {/* <img src="/images/jdubsrub.png" alt="JDub's rub"></img> */}
-              <Image
-                src={jdubsrub}
-                alt="J Dub's rub"
-                priority
-              />
-              <h2>J Dub's rub</h2>
-              <p>The original cajun flavor</p>
-            </a>
-          </li>
-          <li className={styles.card}>
-            <a href="https://nextjs.org/learn">
-              {/* <img src="/images/rougaroo.png" alt="Rougaroo"></img> */}
-              <Image
-                src={rougaroo}
-                alt="Rougaroo"
-                priority
-              />
-              <h2>Rougaroo</h2>
-              <p>A spicy red pepper taste</p>
-            </a>
-          </li>
+          {products.map(product => {
+            const { id, title, description, image, price } = product;
+            return (
+              <li key={id} className={styles.card}>
+                <a href="#">
+                  <Image
+                    src={image}
+                    alt={title}
+                    width="500px"
+                    height="500px"
+                  />
+                  <h2>{title}</h2>
+                  <p>${price}</p>
+                  <p>{description}</p>
+                </a>
+              </li>
+            )
+          })}
         </ul>
       </main>
 
