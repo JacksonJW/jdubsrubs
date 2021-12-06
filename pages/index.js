@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 
@@ -9,8 +10,50 @@ import { initiateCheckout } from '../lib/payments.js'
 
 import products from '../products.json'
 
+const defaultCart = {
+  products: {}
+}
 
 export default function Home() {
+
+  const [cart, updateCart] = useState(defaultCart);
+
+  const cartItems = Object.keys(cart.products).map(key => {
+    const product = products.find(({ id }) => `${id}` === `${key}`);
+    return {
+      ...cart.products[key],
+      pricePerItem: product.price
+    }
+  })
+
+  console.log('cartItems', cartItems)
+
+
+  const subtotal = cartItems.reduce((accumulator, { pricePerItem, quantity }) => {
+    return accumulator + (pricePerItem * quantity)
+  }, 0)
+
+  console.log('subtotal', subtotal)
+
+
+  function addToCart({ id } = {}) {
+    updateCart(prev => {
+      let cartState = { ...prev };
+      // console.log('cartState before', cartState)
+
+      if (cartState.products[id]) {
+        cartState.products[id].quantity += 1;
+      } else {
+        cartState.products[id] = {
+          id,
+          quantity: 1
+        }
+      }
+      // console.log('cartState after', cartState)
+      return cartState;
+    });
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -26,6 +69,14 @@ export default function Home() {
 
         <p className={styles.description}>
           The best barbecue rubs on earth
+        </p>
+
+        <p className={styles.description}>
+          <strong>Items:</strong> 2
+          <br />
+          <strong>Total cost:</strong> $20
+          <br />
+          <button className={styles.button}>Check Out</button>
         </p>
 
         <ul className={styles.grid}>
@@ -46,15 +97,16 @@ export default function Home() {
                 </a>
                 <p>
                   <button className={styles.button} onClick={() => {
-                    initiateCheckout({
-                      lineItems: [
-                        {
-                          price: id,
-                          quantity: 1
-                        }
-                      ]
-                    });
-                  }}>Buy Now!</button>
+                    addToCart({ id });
+                    // initiateCheckout({
+                    //   lineItems: [
+                    //     {
+                    //       price: id,
+                    //       quantity: 1
+                    //     }
+                    //   ]
+                    // });
+                  }}>Add to Cart</button>
                 </p>
               </li>
             )
