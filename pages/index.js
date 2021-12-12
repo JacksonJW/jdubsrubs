@@ -3,8 +3,6 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 
 import Image from 'next/image'
-import rougaroo from '../public/images/rougaroo.png'
-import jdubsrub from '../public/images/jdubsrub.png'
 
 import { initiateCheckout } from '../lib/payments.js'
 
@@ -18,40 +16,41 @@ export default function Home() {
 
   const [cart, updateCart] = useState(defaultCart);
 
+  console.log('cart: ', cart);
+
   const cartItems = Object.keys(cart.products).map(key => {
     const product = products.find(({ id }) => `${id}` === `${key}`);
     return {
       ...cart.products[key],
       pricePerItem: product.price
     }
-  })
+  });
 
   console.log('cartItems', cartItems)
 
 
   const subtotal = cartItems.reduce((accumulator, { pricePerItem, quantity }) => {
     return accumulator + (pricePerItem * quantity)
-  }, 0)
+  }, 0);
 
   console.log('subtotal', subtotal)
 
 
-  function addToCart({ id } = {}) {
-    updateCart(prev => {
-      let cartState = { ...prev };
-      // console.log('cartState before', cartState)
+  function addToCart({ id }) {
+    updateCart((prev) => {
+      let cart = { ...prev };
 
-      if (cartState.products[id]) {
-        cartState.products[id].quantity += 1;
+      if (cart.products[id]) {
+        cart.products[id].quantity = cart.products[id].quantity + 1;
       } else {
-        cartState.products[id] = {
+        cart.products[id] = {
           id,
           quantity: 1
         }
       }
-      // console.log('cartState after', cartState)
-      return cartState;
-    });
+
+      return cart;
+    })
   }
 
   return (
@@ -96,17 +95,7 @@ export default function Home() {
                   <p>{description}</p>
                 </a>
                 <p>
-                  <button className={styles.button} onClick={() => {
-                    addToCart({ id });
-                    // initiateCheckout({
-                    //   lineItems: [
-                    //     {
-                    //       price: id,
-                    //       quantity: 1
-                    //     }
-                    //   ]
-                    // });
-                  }}>Add to Cart</button>
+                  <button className={styles.button} onClick={() => addToCart({ id })}>Add to Cart</button>
                 </p>
               </li>
             )
