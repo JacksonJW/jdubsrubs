@@ -4,13 +4,13 @@
     "title": "J Dub's Rub",
     "description": "The original flavor",
     "image": "/images/jdubsrub.png",
-    "price": 15
+    "price": "15"
   },
   {
     "id": "price_1Jy2bCKnGX5Sob3srDAV6trj",
     "title": "Rougaroo Rub",
     "description": "A spicy red pepper taste",
     "image": "/images/rougaroo.png",
-    "price": 15
+    "price": "15"
   }
 ]

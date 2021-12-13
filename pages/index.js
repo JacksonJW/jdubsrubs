@@ -4,54 +4,12 @@ import styles from '../styles/Home.module.css'
 
 import Image from 'next/image'
 
-import { initiateCheckout } from '../lib/payments.js'
+import useCart from '../hooks/use-cart.js';
 
 import products from '../products.json'
 
-const defaultCart = {
-  products: {}
-}
-
 export default function Home() {
-
-  const [cart, updateCart] = useState(defaultCart);
-
-  console.log('cart: ', cart);
-
-  const cartItems = Object.keys(cart.products).map(key => {
-    const product = products.find(({ id }) => `${id}` === `${key}`);
-    return {
-      ...cart.products[key],
-      pricePerItem: product.price
-    }
-  });
-
-  console.log('cartItems', cartItems)
-
-
-  const subtotal = cartItems.reduce((accumulator, { pricePerItem, quantity }) => {
-    return accumulator + (pricePerItem * quantity)
-  }, 0);
-
-  console.log('subtotal', subtotal)
-
-
-  function addToCart({ id }) {
-    updateCart((prev) => {
-      let cart = { ...prev };
-
-      if (cart.products[id]) {
-        cart.products[id].quantity = cart.products[id].quantity + 1;
-      } else {
-        cart.products[id] = {
-          id,
-          quantity: 1
-        }
-      }
-
-      return cart;
-    })
-  }
+  const { subtotal, totalItems, addToCart, checkout } = useCart();
 
   return (
     <div className={styles.container}>
@@ -71,11 +29,13 @@ export default function Home() {
         </p>
 
         <p className={styles.description}>
-          <strong>Items:</strong> 2
+          <strong>Items:</strong> {totalItems}
           <br />
-          <strong>Total cost:</strong> $20
+          <strong>Total cost:</strong> ${subtotal}
           <br />
-          <button className={styles.button}>Check Out</button>
+          <button className={`${styles.button} ${styles.cartButton}`} onClick={checkout}>
+            Check Out
+          </button>
         </p>
 
         <ul className={styles.grid}>
