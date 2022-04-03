@@ -9,7 +9,7 @@ const Nav = () => {
     return (
         <nav className={styles.nav}>
             <p className={styles.navTitle}>
-                J Dub's Rubs
+                J Dub&apos;s Rubs
             </p>
             <p className={styles.navCart}>
                 <button onClick={checkout}>
