@@ -12,5 +12,12 @@
     "description": "A spicy red pepper taste",
     "image": "/images/rougaroo.png",
     "price": "15"
+  },
+  {
+    "id": "price_1KkKDQKnGX5Sob3secjarVM6",
+    "title": "Santa Maria Tri-tip Rub",
+    "description": "A spicy red pepper taste",
+    "image": "/images/santamariatritip.jpg",
+    "price": "15"
   }
 ]
