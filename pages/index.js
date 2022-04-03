@@ -3,7 +3,7 @@ import styles from '../styles/Home.module.css'
 
 import Image from 'next/image'
 
-import useCart from '../hooks/use-cart.js';
+import { useCart } from '../hooks/use-cart.js';
 
 import products from '../products.json'
 
@@ -25,16 +25,6 @@ export default function Home() {
 
         <p className={styles.description}>
           The best barbecue rubs on earth
-        </p>
-
-        <p className={styles.description}>
-          <strong>Items:</strong> {totalItems}
-          <br />
-          <strong>Total cost:</strong> ${subtotal}
-          <br />
-          <button className={`${styles.button} ${styles.cartButton}`} onClick={checkout}>
-            Check Out
-          </button>
         </p>
 
         <ul className={styles.grid}>
