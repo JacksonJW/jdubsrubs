@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/Link'
 import styles from '../styles/Home.module.css'
 
 import Image from 'next/image'
@@ -32,17 +33,19 @@ export default function Home() {
             const { id, title, description, image, price } = product;
             return (
               <li key={id} className={styles.card}>
-                <a href="#">
-                  <Image
-                    src={image}
-                    alt={title}
-                    width="500px"
-                    height="500px"
-                  />
-                  <h2>{title}</h2>
-                  <p>${price}</p>
-                  <p>{description}</p>
-                </a>
+                <Link href={`/products/${id}`}>
+                  <a href="#">
+                    <Image
+                      src={image}
+                      alt={title}
+                      width="500px"
+                      height="500px"
+                    />
+                    <h2>{title}</h2>
+                    <p>${price}</p>
+                    <p>{description}</p>
+                  </a>
+                </Link>
                 <p>
                   <button className={styles.button} onClick={() => addToCart({ id })}>Add to Cart</button>
                 </p>
