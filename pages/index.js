@@ -34,7 +34,7 @@ export default function Home() {
             return (
               <li key={id} className={styles.card}>
                 <Link href={`/products/${id}`}>
-                  <a href="#">
+                  <a>
                     <Image
                       src={image}
                       alt={title}
