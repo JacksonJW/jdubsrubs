@@ -42,7 +42,7 @@ export default function Product({ product }) {
                 id
               })
             }}>
-              Buy
+              Add to Cart
             </button>
           </p>
         </div>

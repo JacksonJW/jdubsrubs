@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 import { FaShoppingCart } from 'react-icons/fa';
 
 import { useCart } from '../../hooks/use-cart.js';
@@ -9,12 +11,14 @@ const Nav = () => {
     return (
         <nav className={styles.nav}>
             <p className={styles.navTitle}>
-                J Dub&apos;s Rubs
+                <Link href="/">
+                    J Dub&apos;s Rubs
+                </Link>
             </p>
             <p className={styles.navCart}>
-                <button onClick={checkout}>
-                    <FaShoppingCart /> ${subtotal}
-                </button>
+                <Link href="/cart">
+                    <a><FaShoppingCart /> ${subtotal}</a>
+                </Link>
             </p>
         </nav>
     )

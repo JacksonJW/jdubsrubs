@@ -76,6 +76,7 @@ export function useCartState() {
     cart,
     subtotal,
     totalItems,
+    cartItems,
     addToCart,
     checkout
   };
