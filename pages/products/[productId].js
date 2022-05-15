@@ -64,7 +64,6 @@ export default function Product({ product }) {
 }
 
 export async function getStaticProps({ params }) {
-  console.log('params', params)
   const product = products.find(({ id }) => id === params.productId);
   return {
     props: {
