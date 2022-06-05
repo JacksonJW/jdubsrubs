@@ -1,4 +1,5 @@
 import { useState, createContext, useContext, useEffect } from 'react';
+import { FaCreativeCommonsPd } from 'react-icons/fa';
 
 import { initiateCheckout } from '../lib/payments.js'
 
@@ -46,30 +47,48 @@ export function useCartState() {
 
   function addToCart({ id }) {
     updateCart((prev) => {
-      let cart1 = { ...prev };
+      let cart = { ...prev };
 
-      if (cart1.products[id]) {
-        cart1.products[id].quantity = cart1.products[id].quantity + 1;
+      if (cart.products[id]) {
+        cart.products[id].quantity = cart.products[id].quantity + 1;
       } else {
-        cart1.products[id] = {
+        cart.products[id] = {
           id,
           quantity: 1
         }
       }
 
-      return cart1;
+      return cart;
+    })
+  }
+
+  function updateItem({ id, quantity }) {
+    updateCart((prev) => {
+      let cart = { ...prev };
+
+      if (cart.products[id]) {
+        if (quantity === 0) {
+          delete cart.products[id]
+        } else {
+          cart.products[id].quantity = quantity;
+        }
+      }
+
+      return cart;
     })
   }
 
   function checkout() {
-    initiateCheckout({
-      lineItems: cartItems.map(({ id, quantity }) => {
-        return {
-          price: id,
-          quantity
-        }
+    if (cartItems.length > 0) {
+      initiateCheckout({
+        lineItems: cartItems.map(({ id, quantity }) => {
+          return {
+            price: id,
+            quantity
+          }
+        })
       })
-    })
+    }
   }
 
   return {
@@ -78,6 +97,7 @@ export function useCartState() {
     totalItems,
     cartItems,
     addToCart,
+    updateItem,
     checkout
   };
 }
